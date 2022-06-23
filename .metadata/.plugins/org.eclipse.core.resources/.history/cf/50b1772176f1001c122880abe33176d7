@@ -1,0 +1,83 @@
+package com.payhere.accountbook.controller;
+
+import java.security.Principal;
+import java.util.List;
+import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.payhere.accountbook.domain.AccountBookVO;
+import com.payhere.accountbook.service.AccountBookService;
+import com.payhere.security.service.SecurityService;
+
+import lombok.extern.log4j.Log4j;
+
+@RestController
+@Log4j
+@RequestMapping("/payhere")
+public class AccountBookRestController {
+
+	
+	@Autowired
+	private AccountBookService accountService;
+	
+	
+	
+	@GetMapping(value="/account", produces = {MediaType.APPLICATION_ATOM_XML_VALUE,
+			MediaType.APPLICATION_JSON_UTF8_VALUE} )
+	public ResponseEntity<List<AccountBookVO>> accountList(Principal principal){
+		
+		String userId = principal.getName();
+		
+		log.info("로그인 아이디 : " + userId);
+		
+		ResponseEntity<List<AccountBookVO>> entity = null;
+		
+		try {
+			entity = new ResponseEntity<>(accountService.selectTitle(userId), HttpStatus.OK);
+		}catch(Exception e) {
+			e.printStackTrace();
+			entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);	
+	}
+		
+		return entity;
+
+	}
+	
+	@GetMapping(value="/total", produces = {MediaType.APPLICATION_ATOM_XML_VALUE,
+			MediaType.APPLICATION_JSON_UTF8_VALUE} )
+	public ResponseEntity<Integer> accountTotal(Principal principal){
+		
+		String userId = principal.getName();
+		
+		log.info("로그인 아이디 : " + userId);
+		
+		ResponseEntity<Integer> entity = null;
+		
+		System.out.println("총 지출액 : " + accountService.totalAccount(userId));
+		
+		try {
+			entity = new ResponseEntity<>(accountService.totalAccount(userId), HttpStatus.OK);
+		}catch(Exception e) {
+			e.printStackTrace();
+			entity = new ResponseEntity<>(HttpStatus.BAD_REQUEST);	
+		}
+		
+		return entity;
+		
+	}
+	
+
+
+}

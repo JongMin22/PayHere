@@ -1,0 +1,33 @@
+package com.payhere.security;
+
+import java.io.IOException;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.springframework.security.access.AccessDeniedException;
+import org.springframework.security.web.access.AccessDeniedHandler;
+
+import lombok.extern.log4j.Log4j;
+
+@Log4j	// ?–¼ ì»¤ìŠ¤?„°ë§ˆì´ì§•ì„ ?•  ê²½ìš°?Š” AccessDeniedHandler ?¸?„°?˜?´?Š¤ë¥? ì§ì ‘ ?˜¤ë²„ë¼?´?”©?•´ êµ¬í˜„?•´?•¼?•¨.
+public class CustomAccessDeniedHandler implements AccessDeniedHandler {		// xxx?•¸?“¤?Ÿ¬ ?œ» => ?Š¹? •?•œ(xxx) ?ƒ?™©?´ ?„°ì¡Œì„?•Œ ê±”ë?? ?•´ê²°í•´ì£¼ëŠ” ?š©?„
+	
+	
+	@Override
+	public void handle(HttpServletRequest request, HttpServletResponse response,
+			AccessDeniedException accessDeniedException) throws IOException, ServletException {
+		
+		// ë©¤ë²„ ê³„ì •?œ¼ë¡? ?–´?“œë¯? ?˜?´ì§??— ? ‘ê·¼í•œ ê²½ìš° 
+		
+			// 1. ë¡œê·¸ ì°ê³  (?—?Ÿ¬ ?“±ê¸‰ì˜ ë¡œê·¸ë§? ì¶œë ¥?•´ì¤?)
+			log.error("ì»¤ìŠ¤?? ? ‘ê·? ê±°ë? ?•¸?“¤?Ÿ¬ ?‹¤?–‰");
+			log.error("/accessError ?˜?´ì§?ë¡? ë¦¬ë‹¤?´? ‰?Š¸");
+			
+			// 2. ë¦¬ë‹¤?´? ‰?Š¸ ?‹œ?‚´
+			response.sendRedirect("/accessError");
+		
+	}
+
+}

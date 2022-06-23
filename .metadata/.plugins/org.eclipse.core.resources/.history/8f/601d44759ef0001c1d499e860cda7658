@@ -1,0 +1,5 @@
+package com.payhere.acountbook.domain;
+
+public class AccountBookVO {
+
+}

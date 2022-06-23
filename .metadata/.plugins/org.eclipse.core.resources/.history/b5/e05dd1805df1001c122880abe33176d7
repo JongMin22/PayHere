@@ -1,0 +1,49 @@
+package com.payhere.accountbook.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.payhere.security.service.SecurityService;
+
+import lombok.extern.log4j.Log4j;
+
+@Controller
+@Service
+@RequestMapping("/account")
+@Log4j
+public class AccountBookController {
+
+	
+	@Autowired
+	private SecurityService securityService;
+	
+	@PreAuthorize("ROLE_USER")
+	@GetMapping(value="/AccountlList")
+	
+	public String AccountList() {
+		log.info("가계부 리스트 접근");
+		return "account/List";	
+	}
+
+
+	 /* @GetMapping("/detail/{user_id}")
+	public String freeDetail(@PathVariable String user_id,Model model){
+				
+		userservice.selectFree(novelNum);
+		
+		List<FreeNovelVO> FreeList = userservice.selectFree(novelNum);
+		
+		model.addAttribute("FreeList",FreeList);
+		
+		
+		
+		return "free/series";
+		}
+	*/ 	
+}

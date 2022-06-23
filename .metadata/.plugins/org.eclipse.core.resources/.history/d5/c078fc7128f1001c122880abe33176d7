@@ -1,0 +1,21 @@
+package com.payhere.acountbook.domain;
+
+import java.sql.Date;
+
+import lombok.Data;
+
+@Data
+public class AccountBookVO {
+
+	private long accountBookNum; 
+	private String 	userId;
+	private String accountTitle;
+	private String accountContent;
+	private int  money ;
+	private int  card ;
+	private Date accountRdate;  
+	private Date accountMdate;  
+		    
+	
+
+}

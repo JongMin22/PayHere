@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+	<mapper namespace="com.payhere.accountbook.mapper.AccountBookMapper">
+	
+		<!-- ● 1. ResultMap : AccountBookVO
+			      1)기존 컬럼명과 vo의 변수명이 다르거나 2) 구조가 달라질 때(ex. 컬럼 하나에 List<xxVO>로 들어오는 경우) 사용 -->
+		<resultMap type="com.payhere.accountbook.domain.AccountBookVO" id="AccountMap">
+			<result property="accountBookNum" column="account_book_num"/>
+			<result property="userId" column="user_id"/>
+			<result property="accountTitle" column="account_title"/>
+			<result property="accountContent" column="account_content"/>
+			<result property="money" column="money"/>
+			<result property="accountRdate" column="account_rdate"/>
+			<result property="accountMdate" column="account_mdate"/>
+			<result property="deleted" column="deleted"/>
+		</resultMap>
+	
+	<!-- ■ 가계부 제목 목록 가져오기  -->
+	<select id="selectTitle" resultMap="AccountMap">
+	SELECT * FROM account_book_list WHERE user_id = #{userId} and deleted = 1
+	</select>
+	
+	<!-- ■ 삭제된 가계부 제목 목록 가져오기  -->
+	<select id="selectDeletedTitle" resultMap="AccountMap">
+	SELECT * FROM account_book_list WHERE user_id = #{userId} and deleted = 0
+	</select>
+	
+	<!-- ■ 가계부 총 지출 구하기  -->
+	<select id="totalAccount" resultType="Integer">
+	SELECT sum(money) FROM account_book_list WHERE user_id = #{userId} and deleted = 1
+	</select>
+	
+	<!-- ■ 가계부 기입  -->
+	<insert id="insertAccount">
+	
+	INSERT INTO account_book_list(user_id,account_title,account_content,money)
+	 values (#{userId},#{accountTitle},#{accountContent},#{money})
+	
+	</insert>
+	
+	<!-- ■ 가계부 삭제  -->
+	<delete id="deleteAccount">
+	
+	UPDATE account_book_list SET deleted = 0 WHERE account_book_num=#{accountBookNum}
+	
+	</delete>
+	
+	<!-- ■ 가계부 복원  -->
+	<delete id="restoreAccount">
+	
+	UPDATE account_book_list SET deleted = 1 WHERE account_book_num=#{accountBookNum}
+	
+	</delete>
+	
+	<!-- ■ 가계부 수정  -->
+	<update id="updateAccount">
+	
+	UPDATE account_book_list SET account_content=#{accountContent},money=#{money}
+	, account_mdate=now() WHERE account_book_num=#{accountBookNum}
+	
+	</update>
+	
+	
+	
+	
+	</mapper>

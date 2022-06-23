@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+	<mapper namespace="com.payhere.acountbook.mapper.AccountBookMapper">
+	
+	<select id="selectTitle" resultType="com.payhere.acountbook.domain.AccountBookVO">
+	SELECT account_title FROM account_book_list WHERE user_id = #{userId} and deleted = 1
+	</select>
+	
+	
+	<insert id="insertAccount">
+	
+	INSERT INTO account_book_list(user_id,account_title,account_content,money)
+	 values (#{userId},#{accountTitle},#{accountContent},#{money})
+	
+	</insert>
+	
+	<delete id="deleteAccount">
+	
+	UPDATE account_book_list SET deleted = 0 WHERE account_book_num=#{accountBookNum}
+	
+	</delete>
+	
+	<update id="updateAccount">
+	
+	UPDATE account_book_list SET account_content=#{accountContent},money=#{money}
+	, account_mdate=now() WHERE account_book_num=#{accountBookNum}
+	
+	</update>
+	
+	
+	
+	
+	</mapper>

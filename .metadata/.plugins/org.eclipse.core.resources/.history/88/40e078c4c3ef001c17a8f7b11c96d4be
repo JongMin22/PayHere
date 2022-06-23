@@ -1,0 +1,40 @@
+package com.payhere.security;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+
+import com.novel.user.domain.CustomUser;
+import com.novel.user.domain.UserVO;
+import com.novel.user.mapper.UserMapper;
+
+import lombok.extern.log4j.Log4j;
+
+@Log4j	 
+public class CustomUserDetailsService implements UserDetailsService {
+
+	@Autowired
+	private UserMapper mapper;
+	
+	@Override
+	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+		
+		log.warn("?œ ?? ?´ë¦? ?™•?¸ -> " + username);
+		
+		UserVO vo = mapper.getUserInfo(username);
+		
+		log.warn("?™•?¸?œ ?œ ?? ?´ë¦„ìœ¼ë¡? ?–»?–´?˜¨ ? •ë³? -> " + vo);
+		
+		return vo == null? null : new CustomUser(vo);
+		
+		// ?ˆœ?„œ
+			// 1. UserVOë¥? ë°›ì•„?˜¨?‹¤
+			// 2. voê°? null?´ ?•„?‹Œ ê²½ìš° CustomUser ?ƒ?„±?žë¥? ?´?š©?•´ voë¥? ë³??™˜
+			
+			// UserVOë¥? CustomUserë¡? ë³??™˜ -> CustomUser(userë¥? ?ƒ?†) > User(UserDetail?„ ?ƒ?†) > UserDetail : ?Š¤?”„ë§? ?‹œ?ë¦¬í‹°?—?„œ ?‚¬?š©
+			// ì¦?, UserVOë¥? ?Š¤?”„ë§? ?‹œ?ë¦¬í‹°?—?„œ ?‚¬?š©?•  ?ˆ˜ ?žˆ?„ë¡? ë°”ê¾¼ ê²?
+			
+	}
+
+}

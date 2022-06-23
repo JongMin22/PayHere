@@ -1,0 +1,63 @@
+package com.payhere.security;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+
+import lombok.extern.log4j.Log4j;
+
+@Log4j		 // ?–¼ ë¡œê·¸?¸ ?„±ê³? ì²˜ë¦¬?š© ?•¸?“¤?Ÿ¬
+public class CustomLoginSuccessHandler implements AuthenticationSuccessHandler { 
+
+	@Override
+	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
+			Authentication authentication) throws IOException, ServletException {
+
+		// ?–  ë¡œê·¸?¸ ?„±ê³µì‹œ ?–´?–¤ ê¶Œí•œ?¸ì§? ì²´í¬?•˜ê¸? ?œ„?•´ ë¶??—¬ë°›ì? ê¶Œí•œ(?“¤) ë¶ˆëŸ¬?˜¤ê¸?
+			// ROLE_ADMIN?˜ ê²½ìš°?Š” ROLE_USERê°? ?•¨ê»? ë¶??—¬?˜ê¸? ?•Œë¬¸ì—, ê²½ìš°?— ?”°?¼ ê¶Œí•œ?´ ?—¬?Ÿ¿?¼ ?ˆ˜ ?ˆ?Œ
+		log.warn("?– ?– ?– ?– ?– ?– ?– ?– ?– ?– ?– ?– ?– ?– ?– ?–  ?–¼ ?– ?– ?– ?– ?– ?– ?– ?– ?– ?– ?– ?– ?– ?– ?– ?– ");
+		log.warn("ë¡œê·¸?¸ ?„±ê³?");
+		List<String> roleList = new ArrayList<>();
+		
+		
+		// ?–  ?–»?–´?˜¨ authoritiesë¥?, ?–¥?ƒ?œ forë¬¸ìœ¼ë¡? roleList?— ?•˜?‚˜?”© ?„£?–´ì¤?
+		for(GrantedAuthority role : authentication.getAuthorities()) { // getter?— sê°? ë¶™ì–´ ?ˆ?œ¼ë©? ëª¨ë“  ?ë£Œë?? '?‹¤ ê°?? ¸?˜¨?‹¤'?¼ê³? ë³´ë©´ ?¨
+			roleList.add(role.getAuthority());
+		}
+		
+		// ?–  roleList?— ?¬?•¨?œ ê¶Œí•œ?„ ?†µ?•´ ë¡œê·¸?¸ ê³„ì •?˜ ê¶Œí•œ?— ?”°?¼ ì²˜ë¦¬
+			// ?˜… return êµ¬ë¬¸?„ ê°? ifë§ˆë‹¤ ë¶™ì—¬ì¤˜ì•¼ ?•¨ (?•„?‹ˆë©? ë¦¬ë‹¤?´? ‰?Š¸ê°? ì¤‘ë³µ ?˜¸ì¶? ?¨)
+		log.warn("ë¶??—¬ë°›ì? ê¶Œí•œ?“¤" + roleList);
+		log.warn("?– ?– ?– ?– ?– ?– ?– ?– ?– ?– ?– ?– ?– ?– ?– ?– ?– ?– ?– ?– ?– ?– ?– ?– ?– ?– ?– ?– ?– ?– ?– ?– ?– ?– ?– ");
+		
+		if(roleList.contains("ROLE_ADMIN")) {
+			response.sendRedirect("/");
+			return;
+		}
+		if(roleList.contains("ROLE_PAID_WRITER")) {
+			response.sendRedirect("/");
+			return;
+		}
+		if(roleList.contains("ROLE_FREE_WRITER")) {
+			response.sendRedirect("/");
+			return;
+		}
+		if(roleList.contains("ROLE_USER")) {
+			response.sendRedirect("/");
+			return;
+		}
+		
+		response.sendRedirect("/");
+		
+		
+	}
+
+}

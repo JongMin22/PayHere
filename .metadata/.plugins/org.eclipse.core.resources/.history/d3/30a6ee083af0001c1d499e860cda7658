@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http:/mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+	
+<mapper namespace="com.payhere.user.mapper.UserMapper">
+
+<!-- ■ 해당 유저 정보 가져오기 -->
+	
+		<!-- ● 1. ResultMap : UserVO
+			      1)기존 컬럼명과 vo의 변수명이 다르거나 2) 구조가 달라질 때(ex. 컬럼 하나에 List<xxVO>로 들어오는 경우) 사용 -->
+		<resultMap type="com.payhere.user.domain.UserVO" id="userMap">
+			<id property="user_id" column="user_id"/>
+			<result property="user_num" column="user_num"/>
+			<result property="user_id" column="user_id"/>
+			<result property="user_pw" column="user_pw"/>
+			<result property="user_name" column="user_name"/>
+			<result property="user_pnum" column="user_pnum"/>
+			<result property="user_email" column="user_email"/>
+			<result property="user_rdate" column="user_rdate"/>
+			<result property="user_enabled" column="user_enabled"/>
+			<collection property="authList" resultMap="authMap"/>			
+		</resultMap>
+		
+		<!-- ● 2. ResultMap :AuthVO -->
+		<resultMap type="com.novel.user.domain.AuthVO" id="authMap">
+			<result property="auth_num" column="auth_num"/>
+			<result property="user_id" column="user_id"/>
+			<result property="auth" column="auth"/>
+		</resultMap>
+		
+		<!-- ● 3. SELECT 쿼리문 -->
+		<select id="getUserInfo" resultMap="userMap">
+			SELECT
+		        u.user_num, u.user_id, u.user_pw, u.user_name, u.user_pnum, u.user_email, u.user_coin, u.user_coupon, u.user_rdate, u.user_auth_mdate, u.user_enabled,
+		        a.auth
+   			FROM
+        		user_tbl u 
+        	LEFT OUTER JOIN 
+        		auth_tbl a 
+        	on 
+        		u.user_id = a.user_id
+    		WHERE
+        		u.user_id = #{user_id}
+		</select>

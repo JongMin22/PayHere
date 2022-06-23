@@ -1,0 +1,28 @@
+package com.payhere.security.service;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.payhere.user.domain.UserVO;
+import com.payhere.user.mapper.UserMapper;
+
+@Service
+public class SecurityServiceImpl implements SecurityService{
+
+	@Autowired
+	private UserMapper mapper;
+	
+	// �� ȸ������ ���� DB�� ����
+	@Transactional
+	@Override
+	public void insertMember(UserVO vo) {
+		
+		// �� ȸ������ ���� - ȸ������ ����
+		mapper.insertMemberTbl(vo);
+		// �� ȸ������ ���� - ���� ��� ����
+		mapper.insertMemberAuth(vo);
+	}
+	
+
+}

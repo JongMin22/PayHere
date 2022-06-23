@@ -1,0 +1,5 @@
+package com.payhere.acountbook.mapper;
+
+public interface AccountBookMapper {
+
+}

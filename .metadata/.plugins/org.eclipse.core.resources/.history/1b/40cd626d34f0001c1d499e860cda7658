@@ -1,0 +1,5 @@
+package com.payhere.user.domain;
+
+public class AuthVO {
+
+}

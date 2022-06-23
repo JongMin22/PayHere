@@ -1,0 +1,5 @@
+package com.payhere.security.controller;
+
+public class SecurityController {
+
+}
