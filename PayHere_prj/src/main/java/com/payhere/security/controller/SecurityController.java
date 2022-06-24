@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.mysql.cj.protocol.x.AsyncMessageSender;
 import com.payhere.security.service.SecurityService;
 import com.payhere.user.domain.AuthVO;
 import com.payhere.user.domain.UserVO;
@@ -61,7 +62,7 @@ public class SecurityController {
 				// ■ 05.11 회원가입 창 post
 				@PreAuthorize("permitAll")
 				@PostMapping("/join")
-				public void join(UserVO vo, String[] role) { 
+				public String join(UserVO vo, String[] role) { 
 					log.info("가입시 받는 데이터들 : " + vo);
 					System.out.println(vo);
 					
@@ -101,8 +102,9 @@ public class SecurityController {
 					
 					// ● 서비스 호출 (vo를 두 개의 매퍼 메서드를 넣어주는 서비스)
 					service.insertMember(vo);
+				
 						
-					
+						return "redirect:http://localhost:8181/customLogin";
 				}
 		
 			

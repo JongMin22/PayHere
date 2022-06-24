@@ -57,4 +57,5 @@
     <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.RequestMapping"/>
     <fullyQualifiedTypeName name="java.util.Map"/>
     <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.PathVariable"/>
+    <fullyQualifiedTypeName name="com.mysql.cj.protocol.x.AsyncMessageSender"/>
 </qualifiedTypeNameHistroy>

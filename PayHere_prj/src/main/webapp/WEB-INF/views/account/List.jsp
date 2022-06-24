@@ -204,8 +204,8 @@
 		success : function(result){
 			if(result == 'SUCCESS'){
 				alert("가계부가 등록 되었습니다.");
-				$("#accountTitle").val(null);
-				$("#accountContent").val(null);
+				$("#insertTitle").val(null);
+				$("#insertContent").val(null);
 				$("#money").val(null);
 				
 				accountBookList();
@@ -328,8 +328,9 @@ $("#updateDiv").on("click","#updateBtn",function(){
 
 
 // ■ 수정창에서 닫기 클릭시 수정창을 닫아줌. 	
-$("#closeBtn").on("click",function(){ // #closeBtn 클릭시
+$("#updateDiv").on("click","#closeBtn",function(){ // #closeBtn 클릭시
 	$("#updateDiv").hide("slow"); // #modDiv를 닫습니다.
+	
 });
 //==================================◆ 수정창 닫기 ◆===========================================
 

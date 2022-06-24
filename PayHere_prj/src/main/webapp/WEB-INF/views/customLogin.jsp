@@ -15,7 +15,7 @@
 	
 	<form action="/login" method="post">
 		아이디 : <input type="text" name="username" value="user"><br/>
-		비밀번호: <input type="text" name="password" value="pw"><br/><br/>
+		비밀번호: <input type="password" name="password" value="pw"><br/><br/>
 		자동로그인 : <input type="checkbox" name="remember-me"/> &nbsp;&nbsp;
 		<input type="submit" value="로그인하기"/>
 		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/> <!-- 이것을 넣어야 scrf 공격에 안전함. --> 

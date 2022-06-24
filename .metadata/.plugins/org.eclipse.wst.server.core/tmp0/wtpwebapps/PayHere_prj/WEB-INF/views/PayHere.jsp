@@ -13,7 +13,20 @@
 <title>Insert title here</title>
 </head>
 <body>
-<a href="http://localhost:8181/account/List">가계부 이동</a>
+
+<sec:authorize access="isAuthenticated()">
+<a href="http://localhost:8181/account/List">가계부 이동</a><br/>
+<a href="http://localhost:8181/customLogout">로그아웃</a>
+</sec:authorize>
+
+<sec:authorize access="isAnonymous()">
+	<h3>가계부 이용을 위해선 로그인이 필요합니다.</h3> 
+<a href="http://localhost:8181/customLogin">로그인</a><br/>
+<a href="http://localhost:8181/secu/join">회원가입</a>
+
+</sec:authorize>
+
+
 
 </body>
 </html>

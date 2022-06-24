@@ -5,6 +5,7 @@
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,25 +13,20 @@
 <title>Insert title here</title>
 </head>
 <body>
- <div id="wrap">
-            <div id="header">
-                header
-            </div>
-            
-            <div id="container">
-                <div id="sidebar">
-                    sidebar
-                </div>
-                
-                <div id="content">
-                    content
-                </div>
-            </div>
-            
-            <div id="footer">
-                footer
-            </div> 
-        </div>
+
+<sec:authorize access="isAuthenticated()">
+<a href="http://localhost:8181/account/List">가계부 이동</a><br/>
+<a href="http://localhost:8181/customLogout">로그아웃</a>
+</sec:authorize>
+
+<sec:authorize access="isAnonymous()">
+	<h3>가계부 이용을 위해선 회원가입이 필요합니다.</h3> 
+<a href="http://localhost:8181/secu/join">회원가입</a><br/>
+<a href="http://localhost:8181/customLogin">로그인</a>
+
+</sec:authorize>
+
+
 
 </body>
 </html>

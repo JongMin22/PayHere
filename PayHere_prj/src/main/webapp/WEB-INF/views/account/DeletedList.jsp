@@ -15,7 +15,7 @@
  <div id="header">
  </div>
  <div id="container">
- <h1>가계부</h1>
+ <h1>삭제된 가계부</h1>
  <div id="account">
  <ul id="deletedList" style="list-style:None;">
  </ul>
@@ -87,7 +87,7 @@
 DeletedList();
 
 
-
+// ■ 가계부 복구하기
 $("#account").on("click","#restoreAccount",function(){	
 	var accountBookNum = $(this).attr("data-accountBookNum");
 	accountBookNum = Number(accountBookNum);
@@ -119,6 +119,7 @@ $("#account").on("click","#restoreAccount",function(){
 });	// ajax 끝나는부분 
 	
 });
+//==================================◆ 가계부 복구하기 ◆===========================================
 
 $("#accountList").on("click",function(){	
 	
