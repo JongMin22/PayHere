@@ -104,7 +104,7 @@ ___
   ![image](https://user-images.githubusercontent.com/96283110/175456468-e6acf170-d831-4115-9f0d-5267ddeb898c.png)
   ___
 
-  ### 단위 테스트 사용(DB연결)
+  ### 단위 테스트 사용 JUNIT(DB연결)
   
   ![image](https://user-images.githubusercontent.com/96283110/175482617-f0dea42b-b9ae-4cf9-a5ec-42f8881e0526.png)
   ![image](https://user-images.githubusercontent.com/96283110/175482662-fc400091-9c67-4723-8bdf-e974294ccc1b.png)
