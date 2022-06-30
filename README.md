@@ -29,6 +29,10 @@ ___
 ![image](https://user-images.githubusercontent.com/96283110/175437536-4191aa0c-214e-4721-9d4b-8cf8d66545ad.png)
 ___
 
+## 요구사항
+![image](https://user-images.githubusercontent.com/96283110/176577872-eddb0e5f-eb51-41d1-9d23-a1ec976ee616.png)
+
+
 
 ## 기능
    ### 메인페이지(로그인x)
